@@ -1,0 +1,36 @@
+// C++ code
+//
+int gasSensor=A1;
+int buzzer=13;
+int led=12;
+int led1=8;
+void setup()
+{
+  pinMode(A1, INPUT);
+  pinMode(13, OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(led1, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+int sensorValue=analogRead(A1); 
+  Serial.print(" SENSOR VALUE : ");
+  Serial.println(sensorValue);
+  delay(1000);
+  if (sensorValue>250){
+   digitalWrite(buzzer,HIGH);
+     digitalWrite(led,HIGH);
+    digitalWrite(led1,LOW);
+  }
+  else{
+    digitalWrite(buzzer,LOW);
+     digitalWrite(led,LOW);
+    digitalWrite(led1,HIGH);
+  }
+}
+
+
+
+
