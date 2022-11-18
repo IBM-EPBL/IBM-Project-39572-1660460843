@@ -1,0 +1,42 @@
+CODE FOR GAS LEAKAGE MONITORING AND ALERTING SYSTEM
+
+#include "DHTesp.h"
+
+const int DHT_PIN = 15;
+DHTesp dhtSensor;
+int buzzer=13;
+int led=12;
+int led1=14;
+void setup() {
+  Serial.begin(115200);
+  dhtSensor.setup(DHT_PIN, DHTesp::DHT22);
+   pinMode(13, OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(led1, OUTPUT);
+  
+}
+
+void loop() {
+  TempAndHumidity  data = dhtSensor.getTempAndHumidity();
+  Serial.println("Temp: " + String(data.temperature, 2) + "°C");
+  Serial.println("Humidity: " + String(data.humidity, 1) + "%");
+  Serial.println("---");
+  delay(1000);
+  if (data.temperature > 50 && data.humidity>30){
+   digitalWrite(buzzer,HIGH);
+     digitalWrite(led,HIGH);
+    digitalWrite(led1,LOW);
+  }
+  else{
+    digitalWrite(buzzer,LOW);
+     digitalWrite(led,LOW);
+    digitalWrite(led1,HIGH);
+  }
+}
+
+
+
+
+
+
+
